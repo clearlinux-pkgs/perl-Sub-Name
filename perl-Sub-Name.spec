@@ -4,14 +4,14 @@
 #
 Name     : perl-Sub-Name
 Version  : 0.21
-Release  : 1
+Release  : 2
 URL      : https://cpan.metacpan.org/authors/id/E/ET/ETHER/Sub-Name-0.21.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/E/ET/ETHER/Sub-Name-0.21.tar.gz
 Summary  : '(Re)name a sub'
 Group    : Development/Tools
 License  : Artistic-1.0-Perl
-Requires: perl-Sub-Name-lib
-Requires: perl-Sub-Name-man
+Requires: perl-Sub-Name-lib = %{version}-%{release}
+BuildRequires : buildreq-cpan
 
 %description
 This archive contains the distribution Sub-Name,
@@ -19,20 +19,22 @@ version 0.21:
 (Re)name a sub
 This software is copyright (c) 2004 by Matthijs van Duin and cPanel Inc.
 
+%package dev
+Summary: dev components for the perl-Sub-Name package.
+Group: Development
+Requires: perl-Sub-Name-lib = %{version}-%{release}
+Provides: perl-Sub-Name-devel = %{version}-%{release}
+
+%description dev
+dev components for the perl-Sub-Name package.
+
+
 %package lib
 Summary: lib components for the perl-Sub-Name package.
 Group: Libraries
 
 %description lib
 lib components for the perl-Sub-Name package.
-
-
-%package man
-Summary: man components for the perl-Sub-Name package.
-Group: Default
-
-%description man
-man components for the perl-Sub-Name package.
 
 
 %prep
@@ -61,9 +63,9 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -72,12 +74,12 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/x86_64-linux-thread-multi/Sub/Name.pm
+/usr/lib/perl5/vendor_perl/5.26.1/x86_64-linux-thread-multi/Sub/Name.pm
+
+%files dev
+%defattr(-,root,root,-)
+/usr/share/man/man3/Sub::Name.3
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/x86_64-linux-thread-multi/auto/Sub/Name/Name.so
-
-%files man
-%defattr(-,root,root,-)
-/usr/share/man/man3/Sub::Name.3
+/usr/lib/perl5/vendor_perl/5.26.1/x86_64-linux-thread-multi/auto/Sub/Name/Name.so
