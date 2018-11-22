@@ -4,13 +4,14 @@
 #
 Name     : perl-Sub-Name
 Version  : 0.21
-Release  : 2
+Release  : 3
 URL      : https://cpan.metacpan.org/authors/id/E/ET/ETHER/Sub-Name-0.21.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/E/ET/ETHER/Sub-Name-0.21.tar.gz
 Summary  : '(Re)name a sub'
 Group    : Development/Tools
-License  : Artistic-1.0-Perl
+License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-Sub-Name-lib = %{version}-%{release}
+Requires: perl-Sub-Name-license = %{version}-%{release}
 BuildRequires : buildreq-cpan
 
 %description
@@ -32,9 +33,18 @@ dev components for the perl-Sub-Name package.
 %package lib
 Summary: lib components for the perl-Sub-Name package.
 Group: Libraries
+Requires: perl-Sub-Name-license = %{version}-%{release}
 
 %description lib
 lib components for the perl-Sub-Name package.
+
+
+%package license
+Summary: license components for the perl-Sub-Name package.
+Group: Default
+
+%description license
+license components for the perl-Sub-Name package.
 
 
 %prep
@@ -62,6 +72,8 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-Sub-Name
+cp LICENCE %{buildroot}/usr/share/package-licenses/perl-Sub-Name/LICENCE
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -74,7 +86,7 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.26.1/x86_64-linux-thread-multi/Sub/Name.pm
+/usr/lib/perl5/vendor_perl/5.28.0/x86_64-linux-thread-multi/Sub/Name.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -82,4 +94,8 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.26.1/x86_64-linux-thread-multi/auto/Sub/Name/Name.so
+/usr/lib/perl5/vendor_perl/5.28.0/x86_64-linux-thread-multi/auto/Sub/Name/Name.so
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-Sub-Name/LICENCE
