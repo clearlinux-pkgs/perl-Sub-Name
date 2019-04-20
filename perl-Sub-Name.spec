@@ -4,10 +4,10 @@
 #
 Name     : perl-Sub-Name
 Version  : 0.21
-Release  : 8
+Release  : 9
 URL      : https://cpan.metacpan.org/authors/id/E/ET/ETHER/Sub-Name-0.21.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/E/ET/ETHER/Sub-Name-0.21.tar.gz
-Summary  : '(Re)name a sub'
+Summary  : (re)name a sub
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-Sub-Name-lib = %{version}-%{release}
@@ -25,6 +25,7 @@ Summary: dev components for the perl-Sub-Name package.
 Group: Development
 Requires: perl-Sub-Name-lib = %{version}-%{release}
 Provides: perl-Sub-Name-devel = %{version}-%{release}
+Requires: perl-Sub-Name = %{version}-%{release}
 
 %description dev
 dev components for the perl-Sub-Name package.
