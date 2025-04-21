@@ -7,7 +7,7 @@
 #
 Name     : perl-Sub-Name
 Version  : 0.28
-Release  : 30
+Release  : 31
 URL      : https://cpan.metacpan.org/authors/id/E/ET/ETHER/Sub-Name-0.28.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/E/ET/ETHER/Sub-Name-0.28.tar.gz
 Summary  : '(Re)name a sub'
